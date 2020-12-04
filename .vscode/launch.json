@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "advent01",
+      "program": "${workspaceFolder}/advent01/target/debug/advent01",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build advent01"
+    }
+  ]
+}
