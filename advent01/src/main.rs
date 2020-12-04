@@ -26,11 +26,26 @@ fn main() {
         }
     }
 
+    // Solve part 1
     for a in 0..vec.len() {
         for b in 0..vec.len() {
             if a<=b { continue; }
             if vec[a] + vec[b] == 2020 {
                 println!("{0} + {1} = {2} --> {0} * {1} = {3}", vec[a], vec[b], vec[a]+vec[b], vec[a]*vec[b]);
+            }
+        }
+    }
+
+    // Solve part 2
+    for a in 0..vec.len() {
+        for b in 0..vec.len() {
+            for c in 0..vec.len() {
+                if a<=b || b<=c { continue; }
+                let sum: u32 = vec[a] + vec[b] + vec[c];
+                if sum == 2020 {
+                    let prod: u32 = vec[a] * vec[b] * vec[c];
+                    println!("{0} + {1} + {2} = {3} --> {0} * {1} * {2} = {4}", vec[a], vec[b], vec[c], sum, prod);
+                }
             }
         }
     }
