@@ -18,6 +18,15 @@
       "options": {
         "cwd": "${workspaceFolder}/advent02"
       }
+    },
+    {
+      "label": "build advent03",
+      "args": ["build", "-v"],
+      "command": "cargo",
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/advent03"
+      }
     }
   ]
 }
