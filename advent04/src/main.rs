@@ -1,3 +1,4 @@
+#[macro_use] extern crate lazy_static;
 // use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
@@ -21,35 +22,43 @@ fn get_expected_fields() -> HashMap<String, Validator> {
     //let re1 = Regex::new(r"^(\d+)-(\d+) ([a-z]): ([a-z]+)$").unwrap();
 
     fn validate_byr(s: &String) -> bool {
-        let re_4d = Regex::new(r"^\d{4}$").unwrap();
-        if !re_4d.is_match(s) {
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^\d{4}$").unwrap();
+        }
+        if !RE.is_match(s) {
             return false
         }
         let num = s.parse::<u32>().unwrap();
         num >= 1920 && num <= 2002
     }
     fn validate_iyr(s: &String) -> bool {
-        let re_4d = Regex::new(r"^\d{4}$").unwrap();
-        if !re_4d.is_match(s) {
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^\d{4}$").unwrap();
+        }
+        if !RE.is_match(s) {
             return false
         }
         let num = s.parse::<u32>().unwrap();
         num >= 2010 && num <= 2020
     }
     fn validate_eyr(s: &String) -> bool {
-        let re_4d = Regex::new(r"^\d{4}$").unwrap();
-        if !re_4d.is_match(s) {
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^\d{4}$").unwrap();
+        }
+        if !RE.is_match(s) {
             return false
         }
         let num = s.parse::<u32>().unwrap();
         num >= 2020 && num <= 2030
     }
     fn validate_hgt(s: &String) -> bool {
-        let re_hgt = Regex::new(r"^(\d+)(in|cm)$").unwrap();
-        if !re_hgt.is_match(s) {
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^(\d+)(in|cm)$").unwrap();
+        }
+        if !RE.is_match(s) {
             return false
         }
-        let captures = re_hgt.captures(&s).unwrap();
+        let captures = RE.captures(&s).unwrap();
         let num = captures.get(1).unwrap().as_str().parse::<u32>().unwrap();
         let unit = captures.get(2).unwrap().as_str();
         if unit == "in" {
@@ -59,16 +68,22 @@ fn get_expected_fields() -> HashMap<String, Validator> {
         }
     }
     fn validate_hcl(s: &String) -> bool {
-        let re_hex = Regex::new(r"^#[a-f0-9]{6}$").unwrap();
-        re_hex.is_match(s)
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^#[a-f0-9]{6}$").unwrap();
+        }
+        RE.is_match(s)
     }
     fn validate_ecl(s: &String) -> bool {
-        let re_ecl = Regex::new(r"^(amb|blu|brn|gry|grn|hzl|oth)$").unwrap();
-        re_ecl.is_match(s)
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^(amb|blu|brn|gry|grn|hzl|oth)$").unwrap();
+        }
+        RE.is_match(s)
     }
     fn validate_pid(s: &String) -> bool {
-        let re_pid = Regex::new(r"^\d{9}$").unwrap();
-        re_pid.is_match(s)
+        lazy_static! {
+            static ref RE: Regex = Regex::new(r"^\d{9}$").unwrap();
+        }
+        RE.is_match(s)
     }
 
 
@@ -85,7 +100,6 @@ fn get_expected_fields() -> HashMap<String, Validator> {
 
 
 fn get_fields(x: &str) -> HashMap<String, String> {
-    let v: Vec<&str> = x.split(' ').collect();
     // println!("Processing: {}", v.join(" | "));
 
     let mut found = HashMap::new();
