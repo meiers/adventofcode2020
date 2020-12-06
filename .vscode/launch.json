@@ -26,6 +26,15 @@
       "args": [],
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "build advent03"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "advent04",
+      "program": "${workspaceFolder}/advent04/target/debug/advent04",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build advent04"
     }
   ]
 }
