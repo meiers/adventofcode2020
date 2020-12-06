@@ -16,6 +16,8 @@ fn main() {
     let filename = "data/advent05.txt";
 
     let mut max_sid = 0;
+    let mut vec = vec![0; 1024];
+
     if let Ok(lines) = read_lines(filename) {
         for line in lines {
             // these commands may "panick"
@@ -27,12 +29,20 @@ fn main() {
             let row = isize::from_str_radix(&row_s, 2).unwrap();
             let col = isize::from_str_radix(&col_s, 2).unwrap();
             let sid = 8*row + col;
+            vec[sid as usize] = 1;
             if sid > max_sid {
                 max_sid = sid
             }
             // println!("{},{} -> row: {}, col: {} -> ID: {}", &string[0..7], &string[7..10], row, col, sid);
         }
     }
-    println!("Part I: Max seat ID = {}", max_sid)
+    println!("Part I: Max seat ID = {}", max_sid);
+    
+    println!("{}", vec.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(""));
+    for i in 0..vec.len() {
+        if i > 0 && i < vec.len() -1 && vec[i] == 0 && vec[i-1] == 1 && vec[i+1] == 1 {
+            println!("Part II: Free seat ID = {}", i);
+        }
+    }
 
 }
